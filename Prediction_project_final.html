@@ -1,7 +1,7 @@
 #Prediction Assignment Writeup 
 library(caret)
  
-# Read in the training and test sets by using read.csv function. Because the initial data sets contain coloumns mostly filled with blank cells, missining values, and even possible white spaces, it would be desirable to exclude all of them from the data as they wont actually explain the variation among the observations. To this end, all of the blank cells and even cells that might include space (" ") will be interpreted as "NA" as "na.strings charactor vector" is applid to the data sets.
+# Read in the training and test sets by using read.csv function. Because the initial data sets contain columns mostly filled with blank cells, missing values, and even possible white spaces, it would be desirable to exclude all of them from the data as they wont actually explain the variation among the observations. To this end, all of the blank cells and even cells that might include space (" ") will be interpreted as "NA" as "na.strings character vector" is applied to the data sets.
 
 training <- read.csv(file="pml-training.csv", header=T, na.strings=c("NA",""," "))
 dim(training)
@@ -36,7 +36,7 @@ trainIndex = createDataPartition(Final_training$classe, p = 0.6, list = FALSE)
 sub_training = Final_training[trainIndex, ]
 sub_testing = Final_training[-trainIndex, ]
 
-# Now the model is trained using ONLY the sub_training data set. Random forest function in caret is applied on the sub_training data where a 5 fold cross validation strategy is used to decrease the risk for overfitting. One could even apply a 10 fold cross validation strategy for such a big data set where the number of observations are many. Moreover, the number of trees in RF is set to 1000 to decrease the likelihood of overfitting and to increase its performance. I choose Random forest as the classifier of choice because it is one of the best in accuracy among current algorithms, it is fast and effective in handling large data sets with lots of variables and observations. It provides estimates on variables that have the most predictive power in the classification, etc.
+# Now the model is trained using ONLY the sub_training data set. Random forest function in caret is applied on the sub_training data where a 5 fold cross validation strategy is used to decrease the risk for overfitting. One could even apply a 10 fold cross validation strategy for such a big data set where the number of observations are many. Moreover, the number of trees in RF is set to 1000 to decrease the likelihood of overfitting and to increase its performance (http://jonlefcheck.net/2015/02/06/a-practical-guide-to-machine-learning-in-ecology/). I choose Random forest as the classifier of choice because it is one of the best in accuracy among current algorithms, it is fast and effective in handling large data sets with lots of variables and observations. It also provides estimates on variables that have the most predictive power in the classification and more (https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm).
 
 trControl = trainControl(method = "cv", number = 5)
 rf_Model <- train (sub_training$classe ~ ., data=sub_training, method= "rf", ntree = 1000, importance = TRUE, trControl = trControl)
@@ -168,4 +168,6 @@ Pred_test
 Levels: A B C D E
 
 pml_write_files(Pred_test)
+ 
+ 
  
