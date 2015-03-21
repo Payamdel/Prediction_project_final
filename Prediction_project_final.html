@@ -115,7 +115,7 @@ magnet_belt_x         6.422  22.26 22.20 16.78 18.879
 # Prediction on the cases in the sub_testing data set:
 pred <- predict(rf_Model, newdata = sub_testing)
  
-# Create a confusion matrix to provide a set of performance statistics. The RF accuracy on the test set is 0.9978 which is perfect.
+# Create a confusion matrix to provide a set of performance statistics. The RF accuracy on the test set is 0.9978 which is almost perfect.
 confusionMatrix(pred, sub_testing$classe) 
  
  Confusion Matrix and Statistics
