@@ -10,7 +10,7 @@ testing  <- read.csv(file="pml-testing.csv", header=T, na.strings=c("NA",""," ")
 dim(testing)
 [1]  20 160
 
-# Second, all the NAs columns are eliminated and the names of the remaining varaibles (V) are stored:
+# Second, all the columns (variables) that do not include any missing values are found and the names of the these varaibles (V) are stored:
 V_training <-  colnames(training[ , colSums(is.na(training)) == 0])
 V_testing <-  colnames(testing [ , colSums(is.na(testing )) == 0])
   
