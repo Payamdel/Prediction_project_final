@@ -31,7 +31,7 @@ Final_testing <- New_testing [,-(1:6)]
 dim(Final_testing)
 [1] 20 54
 
-# Having done all the above preprocessing step, the number of varaibles are reduced from 160 to 54 variables in the data. Now, the training data is divided into a sub-training and sub-testing data sets where the percentage of training data that goes to sub-training data is 60% and the remainder goes to the sub-testing. The sub-testing data will then be used to test the model.
+# Having done all the above preprocessing step, the number of varaibles is reduced from 160 to 54 variables in the data. Now, the training data is divided into a sub-training and sub-testing data sets where the percentage of training data that goes to sub-training data is 60% and the remainder goes to the sub-testing. The sub-testing data will then be used to test the model.
 set.seed (555)
 trainIndex = createDataPartition(Final_training$classe, p = 0.6, list = FALSE)
 sub_training = Final_training[trainIndex, ]
