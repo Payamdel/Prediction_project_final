@@ -10,7 +10,7 @@ testing  <- read.csv(file="pml-testing.csv", header=T, na.strings=c("NA",""," ")
 dim(testing)
 [1]  20 160
 
-# Second, all the NAs columns are found in the data and the names of those varaibles (V) are stored:
+# Second, all the NAs columns are eliminated and the names of the remaining varaibles (V) are stored:
 V_training <-  colnames(training[ , colSums(is.na(training)) == 0])
 V_testing <-  colnames(testing [ , colSums(is.na(testing )) == 0])
   
@@ -22,7 +22,8 @@ New_testing <- testing[V_testing]
 dim (New_testing)
 [1] 20 60 
 
-# Next, all the six first columns that containing additional information about the observations are removed as they are not of great interesst for the prediction model:
+# Next, all the variables that containing additional information about the observations are removed as they are not of great interesst for the prediction model. These variables are:  X, user_name, raw_timestamp_part_1, raw_timestamp_part_2, cvtd_timestamp and new_window.
+
 Final_training <- New_training [,-(1:6)]
 dim(Final_training)
 [1] 19622    54
@@ -30,7 +31,7 @@ Final_testing <- New_testing [,-(1:6)]
 dim(Final_testing)
 [1] 20 54
 
-# Having done all the above preprocessing, there are only 54 variables left in the data. Now, the training data is divided into a sub-training and sub-testing data sets where the percentage of training data that goes to sub-training data is 60% and the remainder goes to the sub-testing. The sub-testing data will then be used to test the model.
+# Having done all the above preprocessing step, the number of varaibles are reduced from 160 to 54 variables in the data. Now, the training data is divided into a sub-training and sub-testing data sets where the percentage of training data that goes to sub-training data is 60% and the remainder goes to the sub-testing. The sub-testing data will then be used to test the model.
 set.seed (555)
 trainIndex = createDataPartition(Final_training$classe, p = 0.6, list = FALSE)
 sub_training = Final_training[trainIndex, ]
